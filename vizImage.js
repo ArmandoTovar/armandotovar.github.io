@@ -89,7 +89,7 @@
           <span>${item['e-commerce_']}</span>
           <span style="hyphens: auto;text-align: center;max-width:90%">${item['sku_nombre']?.substring(1, 200)}</span>
           <span><b>UPC</b>: ${item['upc']}</span>
-          <span><b>Marca</b>: ${item['atrib(marca)']}</span>
+          <span><b>Marca</b>: ${item['attr(marca)']}</span>
           <span><b>Precio Actual Publicado</b>: $${(item['avg(precio_actual_publicado)'])?.toFixed(2)}</span>
           <span><b>Precio Regular</b>: $${(item['avg(precio_regular)'])?.toFixed(2)}</span>
         `);
