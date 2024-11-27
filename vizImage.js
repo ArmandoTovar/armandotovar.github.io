@@ -11,9 +11,13 @@
       let preload = []
       const worksheets = tableau.extensions.dashboardContent.dashboard.worksheets;
       const worksheet = worksheets.find(sheet => sheet.name === "Detalle innovaciones");
+      worksheet.$
       async function getdata() {
         isLoading = true;
         try {
+          const summary = await worksheet.getSummaryDataAsync()
+          if (summary["_data"].length == 0)
+            return;
           const dataTableReader = await worksheet.getSummaryDataReaderAsync();
           let dataTablePage = null
           if (preload.length < pageSize * (currentPage + 1)) {
@@ -60,7 +64,7 @@
         data.forEach(item => {
           const $card = $('<div>').addClass('card_new');
           const $content = $('<div>').addClass('content');
-          const url = item['attr(imageurls)'];
+          const url = item['attr(imageurls)'] ?? item['atrib(imageurls)'];
 
           const $image = $('<img>')
             .attr('src', url)
@@ -72,8 +76,8 @@
           $content.attr('data-tooltip', `
     <div style="display:flex;flex-direction:column;">
       <span>${item['sku_nombre']}</span>
-      <span><b>Precio Actual Publicado</b>: $${(item['avg(precio_actual_publicado)'])?.toFixed(2)}</span>
-      <span><b>Precio Regular</b>: $${(item['avg(precio_regular)'])?.toFixed(2)}</span>
+          <span><b>Precio Actual Publicado</b>: $${(item['avg(precio_actual_publicado)'] ?? item['prom(precio_actual_publicado)'])?.toFixed(2)}</span>
+          <span><b>Precio Regular</b>: $${(item['avg(precio_regular)'] ?? item['prom(precio_regular)'])?.toFixed(2)}</span>
     </div>`);
 
 
@@ -89,9 +93,9 @@
           <span>${item['e-commerce_']}</span>
           <span style="hyphens: auto;text-align: center;max-width:90%">${item['sku_nombre']?.substring(1, 200)}</span>
           <span><b>UPC</b>: ${item['upc']}</span>
-          <span><b>Marca</b>: ${item['attr(marca)']}</span>
-          <span><b>Precio Actual Publicado</b>: $${(item['avg(precio_actual_publicado)'])?.toFixed(2)}</span>
-          <span><b>Precio Regular</b>: $${(item['avg(precio_regular)'])?.toFixed(2)}</span>
+          <span><b>Marca</b>: ${item['attr(marca)'] ?? item['atrib(marca)']}</span>
+          <span><b>Precio Actual Publicado</b>: $${(item['avg(precio_actual_publicado)'] ?? item['prom(precio_actual_publicado)'])?.toFixed(2)}</span>
+          <span><b>Precio Regular</b>: $${(item['avg(precio_regular)'] ?? item['prom(precio_regular)'])?.toFixed(2)}</span>
         `);
 
           $content.append($p);
