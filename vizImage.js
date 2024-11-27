@@ -11,7 +11,6 @@
       let preload = []
       const worksheets = tableau.extensions.dashboardContent.dashboard.worksheets;
       const worksheet = worksheets.find(sheet => sheet.name === "Detalle innovaciones");
-      worksheet.addEventListener(tableau.TableauEventType.FilterChanged, (e) => { console.log(e); console.log("cambie") });
       async function getdata() {
         isLoading = true;
         try {
@@ -139,6 +138,15 @@
       observer.observe(paginationTrigger);
       getdata();
 
+      worksheet.addEventListener(tableau.TableauEventType.FilterChanged, (e) => {
+        $('#app').empty();
+        currentPage = 0;
+        apiPage = -1;
+        isLoading = false;
+        totalpage = 1;
+        preload = []
+        getdata();
+      });
     });
   });
 })();
