@@ -13,9 +13,10 @@
         isLoading = true;
         const worksheets = tableau.extensions.dashboardContent.dashboard.worksheets;
         const worksheet = worksheets.find(sheet => sheet.name === "Detalle innovaciones");
-        const dataTableReader = await worksheet.getSummaryDataReaderAsync();
 
         try {
+
+          const dataTableReader = await worksheet.getSummaryDataReaderAsync();
           let dataTablePage = null
           if (preload.length < pageSize * (currentPage + 1)) {
             apiPage = apiPage + 1
