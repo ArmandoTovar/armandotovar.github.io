@@ -13,9 +13,7 @@
         isLoading = true;
         const worksheets = tableau.extensions.dashboardContent.dashboard.worksheets;
         const worksheet = worksheets.find(sheet => sheet.name === "Detalle innovaciones");
-
         try {
-
           const dataTableReader = await worksheet.getSummaryDataReaderAsync();
           let dataTablePage = null
           if (preload.length < pageSize * (currentPage + 1)) {
@@ -30,14 +28,16 @@
 
           let next = pageSize + (currentPage * pageSize);
           let isNext = preload.length - 1 < next;
-          if (isNext && preload.length < currentPage * pageSize)
+          if (isNext && preload.length < currentPage * pageSize) {
+            await dataTableReader.releaseAsync();
+            isLoading = false;
             return
+          }
           generateRender(preload.slice(currentPage * pageSize, isNext ? preload.length - 1 : next));
-        } catch (e) {
-          console.error(e);
-        } finally {
           await dataTableReader.releaseAsync();
           isLoading = false;
+        } catch (e) {
+          console.error(e);
         }
       }
 
