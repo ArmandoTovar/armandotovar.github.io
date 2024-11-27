@@ -9,12 +9,11 @@
       let isLoading = false;
       let totalpage = 1;
       let preload = []
+      const worksheets = tableau.extensions.dashboardContent.dashboard.worksheets;
+      const worksheet = worksheets.find(sheet => sheet.name === "Detalle innovaciones");
+      worksheet.addEventListener(tableau.TableauEventType.FilterChanged, (e) => { console.log(e); console.log("cambie") });
       async function getdata() {
         isLoading = true;
-        const worksheets = tableau.extensions.dashboardContent.dashboard.worksheets;
-        console.log(worksheets)
-        const worksheet = worksheets.find(sheet => sheet.name === "Detalle innovaciones");
-        console.log(worksheet)
         try {
           const dataTableReader = await worksheet.getSummaryDataReaderAsync();
           let dataTablePage = null
@@ -139,6 +138,7 @@
       const paginationTrigger = document.getElementById('pagination');
       observer.observe(paginationTrigger);
       getdata();
+
     });
   });
 })();
