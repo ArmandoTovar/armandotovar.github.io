@@ -37,7 +37,7 @@
           await dataTableReader.releaseAsync();
           isLoading = false;
         } catch (e) {
-          console.error(e);
+          console.log(e);
         }
       }
 
