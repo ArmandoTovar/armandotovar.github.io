@@ -12,7 +12,9 @@
       async function getdata() {
         isLoading = true;
         const worksheets = tableau.extensions.dashboardContent.dashboard.worksheets;
+        console.log(worksheets)
         const worksheet = worksheets.find(sheet => sheet.name === "Detalle innovaciones");
+        console.log(worksheet)
         try {
           const dataTableReader = await worksheet.getSummaryDataReaderAsync();
           let dataTablePage = null
