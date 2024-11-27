@@ -21,6 +21,7 @@
             apiPage = apiPage + 1
             if (totalpage > apiPage) {
               dataTablePage = await dataTableReader.getPageAsync(apiPage);
+              console.log(dataTablePage)
               totalpage = dataTableReader.pageCount;
               const data = getJsonFromArray(dataTablePage);
               preload = [...preload, ...data]
@@ -56,7 +57,7 @@
       }
       function generateRender(data) {
         const $app = $('#app');
-
+        console.log(data)
         data.forEach(item => {
           const $card = $('<div>').addClass('card_new');
           const $content = $('<div>').addClass('content');
