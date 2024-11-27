@@ -73,8 +73,8 @@
           $content.attr('data-tooltip', `
     <div style="display:flex;flex-direction:column;">
       <span>${item['sku_nombre']}</span>
-      <span><b>Precio Actual Publicado</b>: $${(item['prom(precio_actual_publicado)']).toFixed(2)}</span>
-      <span><b>Precio Regular</b>: $${(item['prom(precio_regular)']).toFixed(2)}</span>
+      <span><b>Precio Actual Publicado</b>: $${(item['avg(precio_actual_publicado)']).toFixed(2)}</span>
+      <span><b>Precio Regular</b>: $${(item['avg(precio_regular)']).toFixed(2)}</span>
     </div>`);
 
 
@@ -91,8 +91,8 @@
           <span style="hyphens: auto;text-align: center;max-width:90%">${item['sku_nombre'].substring(1, 200)}</span>
           <span><b>UPC</b>: ${item['upc']}</span>
           <span><b>Marca</b>: ${item['atrib(marca)']}</span>
-          <span><b>Precio Actual Publicado</b>: $${(item['prom(precio_actual_publicado)']).toFixed(2)}</span>
-          <span><b>Precio Regular</b>: $${(item['prom(precio_regular)']).toFixed(2)}</span>
+          <span><b>Precio Actual Publicado</b>: $${(item['avg(precio_actual_publicado)']).toFixed(2)}</span>
+          <span><b>Precio Regular</b>: $${(item['avg(precio_regular)']).toFixed(2)}</span>
         `);
 
           $content.append($p);
